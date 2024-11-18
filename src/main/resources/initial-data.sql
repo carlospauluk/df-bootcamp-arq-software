@@ -30,6 +30,8 @@ VALUES (1, '12345678901', 'joao.silva@gmail.com', 'Centro', '01010-010', 'São P
 	   (15, '98732165489', 'patricia.rodrigues@gmail.com', 'Butantã', '16016-016', 'São Paulo', 'SP', 'Avenida O',
 		'150', 'Patrícia Rodrigues', '11987654335');
 
+ALTER TABLE cliente ALTER COLUMN ID RESTART WITH 16;
+
 
 
 INSERT INTO produto (nome, descricao, preco, estoque, categoria)
@@ -66,6 +68,7 @@ VALUES ('Cerveja Pilsen', 'Cerveja Pilsen refrescante com notas de malte leve.',
 	   ('Cerveja Schwarzbier', 'Cerveja escura com corpo leve e sabor suave.', 14.75, 33, 'Escura'),
 	   ('Cerveja Gose', 'Cerveja de trigo levemente salgada e ácida.', 17.25, 24, 'Especial');
 
+ALTER TABLE produto ALTER COLUMN ID RESTART WITH 31;
 
 INSERT INTO pedido_de_venda (id, cliente_id, logradouro, numero, bairro, cidade, estado, cep, dt_venda, modo_pagamento)
 VALUES (1, 1, 'Rua A', '10', 'Centro', 'São Paulo', 'SP', '01010-010', '2024-11-18 10:30:00', 'PIX'),
@@ -76,3 +79,7 @@ VALUES (1, 1, 1, 2, 0.0, 200.0),
 	   (2, 1, 2, 1, 0.0, 200.0),
 	   (3, 2, 2, 2, 20.0, 400.0),
 	   (4, 2, 3, 1, 0.0, 150.0);
+
+ALTER TABLE pedido_de_venda ALTER COLUMN ID RESTART WITH 3;
+
+ALTER TABLE pedido_de_venda_item ALTER COLUMN ID RESTART WITH 5;

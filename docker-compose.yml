@@ -6,9 +6,9 @@ services:
         ports:
             - "8080:8080"
         volumes:
-            - app-data:/opt/df-bootcamp-arq-software/db
+            - /opt/df-bootcamp-arq-software/h2db:/opt/df-bootcamp-arq-software/h2db
         environment:
-            - SPRING_PROFILES_ACTIVE=prod
+            - SPRING_PROFILES_ACTIVE=dev
         networks:
             - app-network
 
