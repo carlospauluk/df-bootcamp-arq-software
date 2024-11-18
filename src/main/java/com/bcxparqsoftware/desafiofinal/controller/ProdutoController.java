@@ -35,8 +35,8 @@ public class ProdutoController {
 		return ResponseEntity.ok(produtos);
 	}
 
-	@GetMapping("/count")
-	public ResponseEntity<Long> count() {
+	@GetMapping("/totalDeRegistros")
+	public ResponseEntity<Long> totalDeRegistros() {
 		long totalProdutos = produtoService.count();
 		return ResponseEntity.ok(totalProdutos);
 	}

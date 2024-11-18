@@ -47,4 +47,8 @@ public class ClienteService {
 	public List<Cliente> findByNome(String nome) {
 		return clienteRepository.findByNomeContainingIgnoreCase(nome);
 	}
+
+	public long count() {
+		return clienteRepository.count();
+	}
 }

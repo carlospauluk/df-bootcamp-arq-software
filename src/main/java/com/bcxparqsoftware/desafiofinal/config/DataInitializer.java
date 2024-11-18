@@ -1,5 +1,6 @@
 package com.bcxparqsoftware.desafiofinal.config;
 
+import com.bcxparqsoftware.desafiofinal.repository.ClienteRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -15,9 +16,18 @@ public class DataInitializer {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	@Autowired
+	private ClienteRepository clienteRepository;
+
 	@PostConstruct
 	public void init() {
 		try {
+			long totalClientes = clienteRepository.count();
+			if (totalClientes > 0) {
+				System.out.println("Dados já inicializados!");
+				return;
+			}
+
 			Path path = new ClassPathResource("initial-data.sql").getFile().toPath();
 			String sql = Files.readString(path);
 

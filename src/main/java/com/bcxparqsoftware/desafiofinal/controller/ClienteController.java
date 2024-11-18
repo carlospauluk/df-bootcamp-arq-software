@@ -46,4 +46,10 @@ public class ClienteController {
 	public void deleteById(@PathVariable Long id) {
 		clienteService.deleteById(id);
 	}
+
+	@GetMapping("/totalDeRegistros")
+	public ResponseEntity<Long> totalDeRegistros() {
+		long totalProdutos = clienteService.count();
+		return ResponseEntity.ok(totalProdutos);
+	}
 }

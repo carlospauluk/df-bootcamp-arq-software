@@ -1,5 +1,6 @@
 package com.bcxparqsoftware.desafiofinal.service;
 
+import com.bcxparqsoftware.desafiofinal.model.Cliente;
 import com.bcxparqsoftware.desafiofinal.model.PedidoDeVenda;
 import com.bcxparqsoftware.desafiofinal.model.PedidoDeVendaItem;
 import com.bcxparqsoftware.desafiofinal.model.Produto;
@@ -42,8 +43,20 @@ public class PedidoDeVendaService {
 		return pedidoDeVendaRepository.save(pedido);
 	}
 
+	public PedidoDeVenda findById(Long id) {
+		return pedidoDeVendaRepository.findById(id)
+			.orElseThrow(() -> new EntityNotFoundException("Pedido de Venda não encontrado"));
+	}
+
+	public List<PedidoDeVenda> findAll() {
+		return pedidoDeVendaRepository.findAll();
+	}
 
 	public List<PedidoDeVenda> getPedidosByCliente(Long clienteId) {
 		return pedidoDeVendaRepository.findByClienteId(clienteId);
+	}
+
+	public long count() {
+		return pedidoDeVendaRepository.count();
 	}
 }
