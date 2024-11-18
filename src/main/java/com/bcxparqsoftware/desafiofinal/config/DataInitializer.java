@@ -1,21 +1,31 @@
 package com.bcxparqsoftware.desafiofinal.config;
 
-import com.bcxparqsoftware.desafiofinal.model.Cliente;
-import com.bcxparqsoftware.desafiofinal.repository.ClienteRepository;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
-@Configuration
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+@Component
 public class DataInitializer {
 
-	@Bean
-	CommandLineRunner initDatabase(ClienteRepository clienteRepository) {
-		return args -> {
-			clienteRepository.save(new Cliente(null, "Carlos", "carlos@example.com", "42999555777"));
-			clienteRepository.save(new Cliente(null, "Maria", "maria@example.com", "42999444555"));
-			clienteRepository.save(new Cliente(null, "João", "joao@example.com", "41987654321"));
-			System.out.println("Dados iniciais inseridos no banco de dados");
-		};
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+
+	@PostConstruct
+	public void init() {
+		try {
+			Path path = new ClassPathResource("initial-data.sql").getFile().toPath();
+			String sql = Files.readString(path);
+
+			jdbcTemplate.execute(sql);
+			System.out.println("Dados inicializados com sucesso a partir do data.sql!");
+
+		} catch (Exception e) {
+			System.err.println("Erro ao inicializar dados: " + e.getMessage());
+		}
 	}
 }
