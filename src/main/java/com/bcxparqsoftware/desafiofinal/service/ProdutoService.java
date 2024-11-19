@@ -45,4 +45,8 @@ public class ProdutoService {
 		produto.setEstoque(produto.getEstoque() - quantidadeSolicitada);
 		produtoRepository.save(produto);
 	}
+
+	public void deleteById(Long id) {
+		produtoRepository.deleteById(id);
+	}
 }

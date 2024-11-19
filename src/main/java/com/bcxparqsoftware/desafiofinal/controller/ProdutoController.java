@@ -42,8 +42,13 @@ public class ProdutoController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Produto> create(@RequestBody Produto produto) {
+	public ResponseEntity<Produto> salvarProduto(@RequestBody Produto produto) {
 		Produto novoProduto = produtoService.save(produto);
 		return ResponseEntity.status(201).body(novoProduto);
+	}
+
+	@DeleteMapping("/{id}")
+	public void deleteById(@PathVariable Long id) {
+		produtoService.deleteById(id);
 	}
 }
